@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+	<title>扫雷</title>
+
+	<style type="text/css">
+
+	    body{
+	    	background: #484563;
+	    }
+		.border {
+			margin-top: 10%;
+			height: auto;
+			width: 80%;
+			border: 2px solid #EF4F23;
+			border-radius: 50px;
+			margin-left: 10%;
+		}
+
+		.screen {
+			border: 2px solid #EF4F23;
+			padding: 1%;
+			height: auto;
+			width: auto;
+			margin-bottom: 3%;
+			margin-top: 5%;
+			border-radius: 20px;
+
+		}
+		.elect {
+			background: #1C2032;
+			height: 50%;
+			width: 30%;
+			border: 3px solid #EF4F23;
+			border-radius: 7%;
+			margin-top: 10%;
+			margin-left: 33%;
+			margin-bottom: 10%;
+			float: left;
+			position: absolute;
+		}
+		.elect p {
+			color: #EF4F23;
+			text-align: center;
+			font-size: 30px;
+			font-family: '微软雅黑';
+			margin-top: 160px;
+			cursor: default;
+		}
+
+		.easy {
+			color: black;
+			border: 1px solid #484563;
+			border-radius: 20px;
+			cursor: pointer;
+			font-size: 25px;
+			text-align: center;
+			padding-top: 0.5%;
+			height: 10%;
+			width: 20%;
+			background: #EF4F23;
+			float: left;
+			margin-top: 18%;
+			margin-left: 10%;
+		}
+
+		.mid {
+			color: black;
+			border: 1px solid #484563;
+			border-radius: 20px;
+			cursor: pointer;
+			font-size: 25px;
+			text-align: center;
+			padding-top: 0.5%;
+			height: 10%;
+			width: 20%;
+			background: #EF4F23;
+			float: left;
+			margin-top: 18%;
+			margin-left: 10%;
+		}
+
+		.difficult {
+			color: black;
+			border: 1px solid #484563;
+			border-radius: 20px;
+			cursor: pointer;
+			font-size: 25px;
+			text-align: center;
+			padding-top: 0.5%;
+			height: 10%;
+			width: 20%;
+			background: #EF4F23;
+			float: left;
+			margin-top: 18%;
+			margin-left: 10%;
+		}
+
+		.easy:hover   {
+			background: #F55843;
+		}
+
+		.mid:hover{
+			background: #F55843;
+		}
+
+		.difficult:hover{
+			background: #F55843;
+		}
+
+		.win-or-failure {
+			background: #1C2032;
+			height: 50%;
+			width: 30%;
+			border: 3px solid #EF4F23;
+			border-radius: 7%;
+			margin-top: 10%;
+			margin-left: 33%;
+			margin-bottom: 10%;
+			float: left;
+			position: absolute;
+		}
+
+		.win-or-failure p{
+			color: #EF4F23;
+			text-align: center;
+			font-size: 40px;
+			font-family: '微软雅黑';
+			margin-top: 130px;
+			margin-left: 15px;
+			cursor: default;
+		}
+
+		.re-elect {
+			color: black;
+			border: 1px solid #484563;
+			border-radius: 20px;
+			cursor: pointer;
+			font-size: 25px;
+			text-align: center;
+			padding-top: 0.7%;
+			height: 10%;
+			width: 30%;
+			background: #EF4F23;
+			float: left;
+			margin-top: 20%;
+			margin-left: 10%;
+		}
+		
+		.re-elect:hover   {
+			background: #F55843;
+		}
+
+		.re-start {
+			color: black;
+			border: 1px solid #484563;
+			border-radius: 20px;
+			cursor: pointer;
+			font-size: 25px;
+			text-align: center;
+			padding-top: 0.7%;
+			height: 10%;
+			width: 30%;
+			background: #EF4F23;
+			float: left;
+			margin-top: 20%;
+			margin-left: 20%;
+		}
+
+		.re-start:hover   {
+			background: #F55843;
+		}
+		.re-elect2 {
+			color: black;
+			border: 1px solid #484563;
+			border-radius: 20px;
+			cursor: pointer;
+			font-size: 25px;
+			text-align: center;
+			padding-top: 0.4%;
+			height: 10%;
+			width: 10%;
+			background: #EF4F23;
+			margin-top: 1%;
+			margin-left: 45%;
+		}
+
+		.re-elect2:hover   {
+			background: #F55843;
+		}
+		.gezi {
+			height: 30px;
+			width: 30px;
+			border: 1.5px solid #EF4F23;
+			font-size: 20px;
+			color: #EF4F23;
+			border-radius: 5px;
+			cursor: pointer;
+			background: #3C4362;
+			margin: 1px;
+		}
+
+		.gezi:hover {
+			background: #F6B93E;
+
+		}
+
+		.hang {
+			height: 40px;
+			width: auto;
+		}
+
+		.leizi{
+			font-size: 30px;
+			text-align: center;
+			border: 1px solid #484563;
+			border-radius: 10px;
+			margin: 5% auto 3%;
+			height: 40px;
+			width: 80px;
+			color: #EF4F23;
+			background: #1C2032;
+			cursor: default;
+		}
+	</style>
+</head>
+<body>
+    <div class="border">
+        <p class="leizi">00</p>
+        <div class="screen">
+        	
+        </div><!--游戏界面-->
+    </div>
+    <div class="re-elect2">重新选择难度</div><!--重新选择难度-->
+    <div class="elect">
+    	<p>请选择难度</p>
+        <div class="easy">简单</div>
+    	<div class="mid">中等</div>
+    	<div class="difficult">困难</div>
+    </div><!--选择难度界面-->
+    <div class="win-or-failure">
+    	<p class="result">胜利！</p>
+    	<span class="re-elect">重新选择难度</span>
+    	<span class="re-start">重新开始</span>
+    </div><!--游戏结果-->
+    
+</body>
+
+<script type="text/javascript">
+    //格子和雷的数量
+    var ieasy= [10,10];
+    var imid= [15,30];
+    var idifficult= [20,50];
+	$(document).ready(function(){
+		//难度
+		var nandu;
+		//隐藏
+		$(".border").hide();
+		$(".re-elect2").hide();
+		$('.win-or-failure').hide();
+		//简单模式点击
+		$(".easy").click(function(){
+			nandu=1;
+			var a;
+			$(".border").show();
+			$(".re-elect2").show();
+			a=randomNumber(10,10);
+		    for (var i = 0; i <10; i++) {
+		    	var $x = $("<div class='hang' id=h"+String(i)+"></div>");
+		    	$(".screen").append($x);
+		    	for(var j = 0;j < 10;j++) {
+		    		var $y = $('<span class= "col-md-1 gezi" id=l'+String(j)+' value='+String(a[i][j])+'></span>')
+		    		$('#h'+String(i)).append($y);
+		    	}//for j
+		    }//for i
+
+		    //点击格子
+		    var zhengchang=0
+		    $('span').click(function(){
+		    	var text=$(this).attr("value");
+		    	var id=Number($(this).attr("id")[1]);
+		    	var row=Number($(this).parent().attr('id')[1]);
+		    	zhengchang=$('span[name]').length;
+		    	if(zhengchang==89){
+		    		$('p').html('胜利!');
+		    		$(".border").hide();
+		    		$(".re-elect2").hide();
+		    		$('.win-or-failure').show();
+		    	}
+		    	if (text=="雷") {
+		    		$("span[value=雷]").animate(1000,function(){
+		    			$('.border').hide();
+		    			$(".re-elect2").hide();
+		    			$("p").html('你踩到雷了');
+		    			$('.win-or-failure').show();
+		    			})//animate
+		    	}//if
+		    	else {
+		    		if (text==0) {
+		    			$(this).css("background","#F6B93E").attr('name','o');
+		    			//左上
+		    			if (id-1>=0 && row-1>=0&&$('#h'+String(row-1)+' #l'+String(id-1)).attr('value')!='雷') {
+		    				$('#h'+String(row-1)+' #l'+String(id-1)).attr('name','o');
+		    				$('#h'+String(row-1)+' #l'+String(id-1)).css("background","#F6B93E");
+		    				var re=$('#h'+String(row-1)+' #l'+String(id-1)).attr('value');
+		    				if(re!=0&&re!='雷'){
+		    					$('#h'+String(row-1)+' #l'+String(id-1)).html(re);
+		    				}
+		    			}
+		    			//上
+		    			if (row-1>=0&&$('#h'+String(row-1)+' #l'+String(id)).attr('value')!='雷') {
+		    				$('#h'+String(row-1)+' #l'+String(id)).attr('name','o');
+		    				$('#h'+String(row-1)+' #l'+String(id)).css("background","#F6B93E");
+		    				
+		    				var re=$('#h'+String(row-1)+' #l'+String(id)).attr('value');
+		    				if(re!=0&&re!='雷'){
+		    					$('#h'+String(row-1)+' #l'+String(id)).html(re);
+		    				}
+		    			}
+		    			//右上
+		    			if (id+1<=9&&row-1>=0&&$('#h'+String(row+1)+' #l'+String(id+1)).attr('value')!='雷') {
+		    				$('#h'+String(row-1)+' #l'+String(id+1)).attr('name','o');
+		    				$('#h'+String(row-1)+' #l'+String(id+1)).css("background","#F6B93E");
+		    				
+		    				var re=$('#h'+String(row-1)+' #l'+String(id+1)).attr('value');
+		    				if(re!=0&&re!='雷'){
+		    					$('#h'+String(row-1)+' #l'+String(id+1)).html(re);
+		    				}
+		    			}
+		    			//左
+		    			if (id-1>=0&&$('#l'+String(id-1)).attr('value')!='雷') {
+		    				$('#h'+String(row)+' #l'+String(id-1)).attr('name','o');
+		    				$('#h'+String(row)+' #l'+String(id-1)).css("background","#F6B93E");
+		    				
+		    				var re=$('#h'+String(row)+' #l'+String(id-1)).attr('value');
+		    				if(re!=0&&re!='雷'){
+		    					$('#h'+String(row)+' #l'+String(id-1)).html(re);
+		    				}
+		    			}
+		    			//右
+		    			if (id+1<=9&&$('#l'+String(id+1)).attr('value')!='雷') {
+		    				$('#h'+String(row)+' #l'+String(id+1)).attr('name','o');
+		    				$('#h'+String(row)+' #l'+String(id+1)).css("background","#F6B93E");
+		    				
+		    				var re=$('#h'+String(row)+' #l'+String(id+1)).attr('value');
+		    				if(re!=0&&re!='雷'){
+		    					$('#h'+String(row)+' #l'+String(id+1)).html(re);
+		    				}
+		    			}
+		    			//左下
+		    			if (id-1>=0&&row+1<=9&&$('#h'+String(row+1)+' #l'+String(id-1)).attr('value')!='雷') {
+		    				$('#h'+String(row+1)+' #l'+String(id-1)).attr('name','o');
+		    				$('#h'+String(row+1)+' #l'+String(id-1)).css("background","#F6B93E");
+		    				
+		    				var re=$('#h'+String(row+1)+' #l'+String(id-1)).attr('value');
+		    				if(re!=0&&re!='雷'){
+		    					$('#h'+String(row+1)+' #l'+String(id-1)).html(re);
+		    				}
+		    			}
+		    			//下
+		    			if (row+1<=9&&$('#h'+String(row+1)+' #l'+String(id)).attr('value')!='雷') {
+		    				$('#h'+String(row+1)+' #l'+String(id)).attr('name','o');
+		    				$('#h'+String(row+1)+' #l'+String(id)).css("background","#F6B93E");
+		    				
+		    				var re=$('#h'+String(row+1)+' #l'+String(id)).attr('value');
+		    				if(re!=0&&re!='雷'){
+		    					$('#h'+String(row+1)+' #l'+String(id)).html(re);
+		    				}
+		    			}
+		    			//右下
+		    			if (id+1<=9&&row+1<=9&&$('#h'+String(row+1)+' #l'+String(id+1)).attr('value')!='雷') {
+		    				$('#h'+String(row+1)+' #l'+String(id+1)).attr('name','o');
+		    				$('#h'+String(row+1)+' #l'+String(id+1)).css("background","#F6B93E");
+		    				
+		    				var re=$('#h'+String(row+1)+' #l'+String(id+1)).attr('value');
+		    				if(re!=0&&re!='雷'){
+		    					$('#h'+String(row+1)+' #l'+String(id+1)).html(re);
+		    				}
+		    			}
+		    		}//if
+		    		else {
+		    			$(this).css("background","#F6B93E").attr('name','o');
+		    		}
+		    	}//else
+		    });
+		    $("p").html(ieasy[1]);
+		    $(".screen").css({
+		    	"width":"70%",
+		    	"margin-left":"15%",
+		    	"padding-top":"5%",
+		    	"padding-bottom":"5%",
+		    	"padding-right":"5%",
+		});
+		    $(".border").css({
+		    	"width":"35%",
+		    	"margin-left":"32%",
+		    
+		    });
+		    $(".hang").css("margin-left","15%");
+			$('.elect').hide();
+		})
+
+		//中等难度点击
+		$(".mid").click(function(){
+			nandu=2;
+			$(".border").show();
+			$(".re-elect2").show();
+			var a;
+			$(".border").show();
+			$(".re-elect2").show();
+			a=randomNumber(15,30);
+			for (var i = 0; i <15; i++) {
+		    	var $x = $("<div class='hang' id=h"+String(i)+"></div>");
+		    	$(".screen").append($x);
+		    	for(var j = 0;j < 15;j++) {
+		    		var $y = $('<span class= "col-md-1 gezi" id=l'+String(j)+' value='+String(a[i][j])+'></span>')
+		    		$('#h'+String(i)).append($y);
+		    	}//for j
+		    }//for i
+
+		    //点击格子
+		    var zhengchang=0
+
+		    $('span').click(function(){
+		    	zhengchang=$('span[name]').length;
+		    	if(zhengchang==194){
+		    		$('p').html('胜利!');
+		    		$(".border").hide();
+		    		$(".re-elect2").hide();
+		    		$('.win-or-failure').show();
+		    	}
+		    	var text=$(this).attr("value");
+		    	var id=Number($(this).attr("id").slice(1));
+		    	var row=Number($(this).parent().attr('id').slice(1));
+		    	if (text=="雷") {
+		    		$("span[value=雷]").animate(1000,function(){
+		    			$('.border').hide();
+		    			$(".re-elect2").hide();
+		    			$("p").html('你踩到雷了');
+		    			$('.win-or-failure').show();
+		    			})//animate
+		    	}//if
+		    	else {
+		    		if (text==0) {
+		    			$(this).css("background","#F6B93E").attr('name','o');
+		    			//左上
+		    			if (id-1>=0 && row-1>=0&&$('#h'+String(row-1)+' #l'+String(id-1)).attr('value')!='雷') {
+		    				$('#h'+String(row-1)+' #l'+String(id-1)).css("background","#F6B93E").attr('name','o');
+		    				var re=$('#h'+String(row-1)+' #l'+String(id-1)).attr('value');
+		    				if(re!=0&&re!='雷'){
+		    					$('#h'+String(row-1)+' #l'+String(id-1)).html(re);
+		    				}
+		    			}
+		    			//上
+		    			if (row-1>=0&&$('#h'+String(row-1)+' #l'+String(id)).attr('value')!='雷') {
+		    				$('#h'+String(row-1)+' #l'+String(id)).css("background","#F6B93E").attr('name','o');
+		    				var re=$('#h'+String(row-1)+' #l'+String(id)).attr('value');
+		    				if(re!=0&&re!='雷'){
+		    					$('#h'+String(row-1)+' #l'+String(id)).html(re);
+		    				}
+		    			}
+		    			//右上
+		    			if (id+1<=14&&row-1>=0&&$('#h'+String(row+1)+' #l'+String(id+1)).attr('value')!='雷') {
+		    				$('#h'+String(row-1)+' #l'+String(id+1)).css("background","#F6B93E").attr('name','o');
+		    				var re=$('#h'+String(row-1)+' #l'+String(id+1)).attr('value');
+		    				if(re!=0&&re!='雷'){
+		    					$('#h'+String(row-1)+' #l'+String(id+1)).html(re);
+		    				}
+		    			}
+		    			//左
+		    			if (id-1>=0&&$('#l'+String(id-1)).attr('value')!='雷') {
+		    				$('#h'+String(row)+' #l'+String(id-1)).css("background","#F6B93E");
+		    				var re=$('#h'+String(row)+' #l'+String(id-1)).attr('value').attr('name','o');
+		    				if(re!=0&&re!='雷'){
+		    					$('#h'+String(row)+' #l'+String(id-1)).html(re);
+		    				}
+		    			}
+		    			//右
+		    			if (id+1<=14&&$('#l'+String(id+1)).attr('value')!='雷') {
+		    				$('#h'+String(row)+' #l'+String(id+1)).css("background","#F6B93E");
+		    				var re=$('#h'+String(row)+' #l'+String(id+1)).attr('value').attr('name','o');
+		    				if(re!=0&&re!='雷'){
+		    					$('#h'+String(row)+' #l'+String(id+1)).html(re);
+		    				}
+		    			}
+		    			//左下
+		    			if (id-1>=0&&row+1<=14&&$('#h'+String(row+1)+' #l'+String(id-1)).attr('value')!='雷') {
+		    				$('#h'+String(row+1)+' #l'+String(id-1)).css("background","#F6B93E").attr('name','o');
+		    				var re=$('#h'+String(row+1)+' #l'+String(id-1)).attr('value');
+		    				if(re!=0&&re!='雷'){
+		    					$('#h'+String(row+1)+' #l'+String(id-1)).html(re);
+		    				}
+		    			}
+		    			//下
+		    			if (row+1<=14&&$('#h'+String(row+1)+' #l'+String(id)).attr('value')!='雷') {
+		    				$('#h'+String(row+1)+' #l'+String(id)).css("background","#F6B93E").attr('name','o');
+		    				var re=$('#h'+String(row+1)+' #l'+String(id)).attr('value');
+		    				if(re!=0&&re!='雷'){
+		    					$('#h'+String(row+1)+' #l'+String(id)).html(re);
+		    				}
+		    			}
+		    			//右下
+		    			if (id+1<=14&&row+1<=14&&$('#h'+String(row+1)+' #l'+String(id+1)).attr('value')!='雷') {
+		    				$('#h'+String(row+1)+' #l'+String(id+1)).css("background","#F6B93E").attr('name','o');
+		    				var re=$('#h'+String(row+1)+' #l'+String(id+1)).attr('value');
+		    				if(re!=0&&re!='雷'){
+		    					$('#h'+String(row+1)+' #l'+String(id+1)).html(re);
+		    				}
+		    			}
+		    		}//if
+		    		else {
+		    			$(this).css("background","#F6B93E").attr('name','o');
+		    		}
+		    	}//else
+		    });
+		    $("p").html(imid[1]);
+		    $(".screen").css({
+		    	"width":"82%",
+		    	"margin-left":"10%",
+		    	"padding-top":"5%",
+		    	"padding-bottom":"5%",
+		    	"padding-right":"9%",
+
+		});
+		    $(".border").css({
+		    	"width":"45%",
+		    	"margin-left":"27%",
+		    
+		    });
+		    $(".hang").css("margin-left","15%");
+			$('.elect').hide();
+		})
+
+		//困难难度点击
+		$(".difficult").click(function(){
+			nandu=3;
+			$(".border").show();
+		    $(".re-elect2").show();
+		    var a;
+			$(".border").show();
+			$(".re-elect2").show();
+			a=randomNumber(20,50);
+			for (var i = 0; i <20; i++) {
+		    	var $x = $("<div class='hang' id=h"+String(i)+"></div>");
+		    	$(".screen").append($x);
+		    	for(var j = 0;j < 20;j++) {
+		    		var $y = $('<span class= "col-md-1 gezi" id=l'+String(j)+' value='+String(a[i][j])+'></span>')
+		    		$('#h'+String(i)).append($y);
+		    	}//for j
+		    }//for i
+		    //点击格子
+		    var zhengchang=0
+		    $('span').click(function(){
+		    	zhengchang=$('span[name]').length;
+		    	if(zhengchang==349){
+		    		$('p').html('胜利!');
+		    		$(".border").hide();
+		    		$(".re-elect2").hide();
+		    		$('.win-or-failure').show();
+		    	}
+		    	var text=$(this).attr("value");
+		    	var id=Number($(this).attr("id").slice(1));
+		    	var row=Number($(this).parent().attr('id').slice(1));
+		    	if (text=="雷") {
+		    		$("span[value=雷]").animate(1000,function(){
+		    			$('.border').hide();
+		    			$(".re-elect2").hide();
+		    			$("p").html('你踩到雷了');
+		    			$('.win-or-failure').show();
+		    			})//animate
+		    	}//if
+		    	else {
+		    		if (text==0) {
+		    			$(this).css("background","#F6B93E").attr('name','o');
+		    			//左上
+		    			if (id-1>=0 && row-1>=0&&$('#h'+String(row-1)+' #l'+String(id-1)).attr('value')!='雷') {
+		    				$('#h'+String(row-1)+' #l'+String(id-1)).css("background","#F6B93E").attr('name','o');
+		    				var re=$('#h'+String(row-1)+' #l'+String(id-1)).attr('value');
+		    				if(re!=0&&re!='雷'){
+		    					$('#h'+String(row-1)+' #l'+String(id-1)).html(re);
+		    				}
+		    			}
+		    			//上
+		    			if (row-1>=0&&$('#h'+String(row-1)+' #l'+String(id)).attr('value')!='雷') {
+		    				$('#h'+String(row-1)+' #l'+String(id)).css("background","#F6B93E").attr('name','o');
+		    				var re=$('#h'+String(row-1)+' #l'+String(id)).attr('value');
+		    				if(re!=0&&re!='雷'){
+		    					$('#h'+String(row-1)+' #l'+String(id)).html(re);
+		    				}
+		    			}
+		    			//右上
+		    			if (id+1<=19&&row-1>=0&&$('#h'+String(row+1)+' #l'+String(id+1)).attr('value')!='雷') {
+		    				$('#h'+String(row-1)+' #l'+String(id+1)).css("background","#F6B93E").attr('name','o');
+		    				var re=$('#h'+String(row-1)+' #l'+String(id+1)).attr('value');
+		    				if(re!=0&&re!='雷'){
+		    					$('#h'+String(row-1)+' #l'+String(id+1)).html(re);
+		    				}
+		    			}
+		    			//左
+		    			if (id-1>=0&&$('#l'+String(id-1)).attr('value')!='雷') {
+		    				$('#h'+String(row)+' #l'+String(id-1)).css("background","#F6B93E").attr('name','o');
+		    				var re=$('#h'+String(row)+' #l'+String(id-1)).attr('value');
+		    				if(re!=0&&re!='雷'){
+		    					$('#h'+String(row)+' #l'+String(id-1)).html(re);
+		    				}
+		    			}
+		    			//右
+		    			if (id+1<=19&&$('#l'+String(id+1)).attr('value')!='雷') {
+		    				$('#h'+String(row)+' #l'+String(id+1)).css("background","#F6B93E").attr('name','o');
+		    				var re=$('#h'+String(row)+' #l'+String(id+1)).attr('value');
+		    				if(re!=0&&re!='雷'){
+		    					$('#h'+String(row)+' #l'+String(id+1)).html(re);
+		    				}
+		    			}
+		    			//左下
+		    			if (id-1>=0&&row+1<=19&&$('#h'+String(row+1)+' #l'+String(id-1)).attr('value')!='雷') {
+		    				$('#h'+String(row+1)+' #l'+String(id-1)).css("background","#F6B93E").attr('name','o');
+		    				var re=$('#h'+String(row+1)+' #l'+String(id-1)).attr('value');
+		    				if(re!=0&&re!='雷'){
+		    					$('#h'+String(row+1)+' #l'+String(id-1)).html(re);
+		    				}
+		    			}
+		    			//下
+		    			if (row+1<=19&&$('#h'+String(row+1)+' #l'+String(id)).attr('value')!='雷') {
+		    				$('#h'+String(row+1)+' #l'+String(id)).css("background","#F6B93E").attr('name','o');
+		    				var re=$('#h'+String(row+1)+' #l'+String(id)).attr('value');
+		    				if(re!=0&&re!='雷'){
+		    					$('#h'+String(row+1)+' #l'+String(id)).html(re);
+		    				}
+		    			}
+		    			//右下
+		    			if (id+1<=19&&row+1<=19&&$('#h'+String(row+1)+' #l'+String(id+1)).attr('value')!='雷') {
+		    				$('#h'+String(row+1)+' #l'+String(id+1)).css("background","#F6B93E").attr('name','o');
+		    				var re=$('#h'+String(row+1)+' #l'+String(id+1)).attr('value');
+		    				if(re!=0&&re!='雷'){
+		    					$('#h'+String(row+1)+' #l'+String(id+1)).html(re);
+		    				}
+		    			}
+		    		}//if
+		    		else {
+		    			$(this).css("background","#F6B93E").attr('name','o');
+		    		}
+		    	}//else
+		    });
+		    $("p").html(idifficult[1]);
+		    $(".screen").css({
+		    	"width":"80%",
+		    	"margin-left":"10%",
+		    	"padding-top":"5%",
+		    	"padding-bottom":"5%",
+		    	"padding-right":"8%",
+
+		});
+		    $(".border").css({
+		    	"width":"60%",
+		    	"margin-left":"20%",
+		    
+		    });
+		    $(".hang").css("margin-left","15%");
+			$('.elect').hide();
+		})
+
+		//布雷 参数mine,num分别表示一个二维数组和布雷的数目   
+		function randomNumber(long,num) {
+			var mine=new Array([long]);
+			for (var q=0;q<long;q++) {
+				for (var w=0;w<long;w++) {
+					mine[q]=new Array([long])
+				}
+			} 
+			var rows=long;
+			var cols=long;  
+			var i=0; 
+
+			//完成布雷工作 
+			while(i<num) {  
+				var row=Math.ceil((rows*Math.random()))-1; 
+				var col=Math.ceil((cols*Math.random()))-1;  
+				if (mine[row][col]!="雷") { 
+					mine[row][col]="雷";  
+					i++;
+				}
+			}
+
+			//完成雷数提示工作
+			for (var i=0;i<rows;i++) {
+				for (var j=0;j<cols;j++) {
+					var mineNum=0;
+					//判断左上
+					if ((i-1>=0)&&(j-1>=0)) {
+						if(mine[i-1][j-1]=="雷") 
+							mineNum++;
+					}
+					//判断正上 
+					if (i>=1) {
+						if (mine[i-1][j]=="雷")
+							mineNum++;
+					}
+					//判断右上 
+					if ((i-1>=0)&&(j<=cols-2)) {
+						if (mine[i-1][j+1]=="雷") 
+							mineNum++;
+					}
+					//判断左边  
+					if (j>=1) {
+						if (mine[i][j-1]=="雷")
+							mineNum++;
+					}
+					//判断右边 
+					if (j<=cols-2) {
+						if (mine[i][j+1]=="雷")
+							mineNum++;
+					}
+					//判断左下
+					if ((i<=rows-2)&&(j-1>=0)) {
+						if (mine[i+1][j-1]=="雷")
+							mineNum++;
+					} 
+					//判断正下 
+					if (i<=rows-2) {
+						if (mine[i+1][j]=="雷")
+							mineNum++;
+					}
+					//判断右下
+					if ((i<=rows-2)&&(j<=cols-2)) {
+						if (mine[i+1][j+1]=="雷")
+							mineNum++;
+					}
+					if (mine[i][j]!="雷") {
+						mine[i][j]=mineNum;
+					}
+				}
+			}
+			return mine;
+		}	
+		//re-elect2
+		$(".re-elect2").click(function() {
+			$('.elect p').html('重新选择难度');
+			$('.screen').empty();
+			$('.border').hide();
+			$(".re-elect2").hide();
+			$('.win-or-failure').hide();
+			$('.elect').show();
+		});
+
+		//re-ecect
+		$(".re-elect").click(function() {
+			$('.elect p').html('重新选择难度');
+			$('.screen').empty();
+			$('.border').hide();
+			$(".re-elect2").hide();
+			$('.win-or-failure').hide();
+			$('.elect').show();
+		});
+
+		//re-start
+		$('.re-start').click(function(){
+			$('.screen').empty();
+			switch(nandu){
+				case 1: $('.easy').trigger('click');$('.win-or-failure').hide();break;
+				case 2:$('.mid').trigger('click');$('.win-or-failure').hide();break;
+				default:$('.difficult').trigger('click');$('.win-or-failure').hide();break;
+			}
+		})
+
+
+	})
+</script>
+</html>
